@@ -572,16 +572,33 @@
   }
 
   // buttons
+  // iOS Safari can drop `click` events when `touchend.preventDefault()` is used.
+  // Use pointer events as primary, keep click as fallback.
+  startBtn.addEventListener('pointerup', (e) => { e.preventDefault(); start(); });
   startBtn.addEventListener('click', start);
+
+  howBtn.addEventListener('pointerup', (e) => { e.preventDefault(); sound.click(); setState(State.HOW); });
   howBtn.addEventListener('click', () => { sound.click(); setState(State.HOW); });
+
+  closeHowBtn.addEventListener('pointerup', (e) => { e.preventDefault(); sound.click(); setState(State.MENU); });
   closeHowBtn.addEventListener('click', () => { sound.click(); setState(State.MENU); });
 
+  pauseBtn.addEventListener('pointerup', (e) => { e.preventDefault(); pause(); });
   pauseBtn.addEventListener('click', pause);
+
+  resumeBtn.addEventListener('pointerup', (e) => { e.preventDefault(); resume(); });
   resumeBtn.addEventListener('click', resume);
+
+  restartBtn.addEventListener('pointerup', (e) => { e.preventDefault(); restart(); });
   restartBtn.addEventListener('click', restart);
+
+  backToMenuBtn.addEventListener('pointerup', (e) => { e.preventDefault(); backToMenu(); });
   backToMenuBtn.addEventListener('click', backToMenu);
 
+  playAgainBtn.addEventListener('pointerup', (e) => { e.preventDefault(); restart(); });
   playAgainBtn.addEventListener('click', restart);
+
+  goMenuBtn.addEventListener('pointerup', (e) => { e.preventDefault(); backToMenu(); });
   goMenuBtn.addEventListener('click', backToMenu);
 
   // SFX toggle
@@ -597,8 +614,9 @@
     }
   });
 
-  // iOS: prevent double-tap zoom gestures on buttons
-  for (const el of [leftBtn, rightBtn, pauseBtn, startBtn, resumeBtn, restartBtn, playAgainBtn]) {
+  // iOS: prevent double-tap zoom gestures on buttons.
+  // IMPORTANT: do NOT preventDefault on touchend for menu buttons, it can suppress click.
+  for (const el of [leftBtn, rightBtn]) {
     el.addEventListener('touchend', (e) => e.preventDefault(), { passive: false });
   }
 
