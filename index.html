@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Car Racer (iPhone)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <canvas id="game" class="game" aria-label="Car racing game" role="img"></canvas>
+
+    <!-- HUD -->
+    <div class="hud" id="hud" aria-hidden="true">
+      <div class="hud__left">
+        <div class="pill">Score: <span id="score">0</span></div>
+        <div class="pill">Best: <span id="best">0</span></div>
+      </div>
+      <div class="hud__right">
+        <button id="pauseBtn" class="btn btn--small" type="button">Pause</button>
+        <label class="pill pill--toggle" title="Sound effects">
+          <input id="sfxToggle" type="checkbox" checked />
+          <span>SFX</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Touch controls -->
+    <div class="controls" id="controls" aria-hidden="true">
+      <button id="leftBtn" class="touch" type="button" aria-label="Move left">
+        <span>◀</span>
+      </button>
+      <button id="rightBtn" class="touch" type="button" aria-label="Move right">
+        <span>▶</span>
+      </button>
+    </div>
+
+    <!-- Menus -->
+    <div class="overlay" id="menuOverlay" role="dialog" aria-modal="true">
+      <div class="card">
+        <h1 class="title">Car Racer</h1>
+        <p class="subtitle">Endless 3‑lane dodger. Tap ◀ ▶ (or swipe) to change lanes.</p>
+        <div class="stack">
+          <button id="startBtn" class="btn" type="button">Start</button>
+          <button id="howBtn" class="btn btn--ghost" type="button">How to play</button>
+        </div>
+        <p class="fine">Tip: Add to Home Screen for full‑screen play.</p>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="howOverlay" role="dialog" aria-modal="true">
+      <div class="card">
+        <h2 class="title">How to play</h2>
+        <ul class="list">
+          <li>Auto‑accelerate: speed ramps up over time.</li>
+          <li>Avoid oncoming cars and blocks.</li>
+          <li>Use on‑screen ◀ ▶ buttons (or swipe left/right).</li>
+          <li>Pause anytime; restart after a crash.</li>
+        </ul>
+        <div class="stack">
+          <button id="closeHowBtn" class="btn" type="button">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="pauseOverlay" role="dialog" aria-modal="true">
+      <div class="card">
+        <h2 class="title">Paused</h2>
+        <div class="stack">
+          <button id="resumeBtn" class="btn" type="button">Resume</button>
+          <button id="restartBtn" class="btn btn--ghost" type="button">Restart</button>
+          <button id="backToMenuBtn" class="btn btn--ghost" type="button">Main menu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="gameOverOverlay" role="dialog" aria-modal="true">
+      <div class="card">
+        <h2 class="title">Crash!</h2>
+        <p class="subtitle">Score: <span id="finalScore">0</span></p>
+        <div class="stack">
+          <button id="playAgainBtn" class="btn" type="button">Play again</button>
+          <button id="goMenuBtn" class="btn btn--ghost" type="button">Main menu</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
